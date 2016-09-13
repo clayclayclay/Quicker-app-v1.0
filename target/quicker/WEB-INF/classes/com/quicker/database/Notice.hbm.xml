@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.quicker.database.Notice" table="coun_notice"
+		 catalog="quicker">
+		<id name="id">
+			<column name="id" sql-type="int unsigned" not-null="true" />
+			<generator class="identity" />
+		</id>
+		<property name="title">
+			<column name="title" sql-type="varchar" length="20" />
+		</property>
+		<property name="content">
+			<column name="content" sql-type="varchar" length="200" />
+		</property>
+
+		<!--<property name="counUser">-->
+			<!--<column name="coun_user" sql-type="int" length="10" />-->
+		<!--</property>-->
+
+	</class>
+</hibernate-mapping>

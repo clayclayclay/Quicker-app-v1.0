@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.quicker.database.ExcelInfo" table="excelInfo"
+		 catalog="quicker">
+		<id name="id">
+			<column name="id" sql-type="int unsigned" not-null="true" />
+			<generator class="identity" />
+		</id>
+		<property name="excelName">
+			<column name="excelName" sql-type="varchar" length="30" />
+		</property>
+		<property name="excelPath">
+			<column name="excelPath" sql-type="varchar" length="30" />
+		</property>
+		<property name="uploadTime">
+			<column name="upload_time" sql-type="varchar" length="20"/>
+		</property>
+	</class>
+</hibernate-mapping>

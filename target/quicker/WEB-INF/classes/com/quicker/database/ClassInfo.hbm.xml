@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.quicker.database.ClassInfo" table="class_info"
+		 catalog="quicker">
+		<id name="className">
+			<column name="class_name" sql-type="varchar" not-null="true" />
+			<generator class="assigned" />
+		</id>
+		<property name="classCode">
+			<column name="class_code" sql-type="varchar" length="20" />
+		</property>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.quicker.database.ExcelAndTable" table="excel_and_table"
+		 catalog="quicker">
+		<id name="id">
+			<column name="id" sql-type="int unsigned" not-null="true" />
+			<generator class="identity" />
+		</id>
+		<property name="tableName">
+			<column name="table_names" sql-type="varchar" length="20" />
+		</property>
+		<property name="excelName">
+			<column name="excel_name" sql-type="varchar" length="30" />
+		</property>
+	</class>
+</hibernate-mapping>

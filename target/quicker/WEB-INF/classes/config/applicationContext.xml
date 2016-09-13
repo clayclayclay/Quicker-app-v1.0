@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+	<!-- 导入外部的properties文件 -->
+	<context:property-placeholder location="classpath:config/db.properties" />
+
+	<!--  配置两个数据源 -->
+
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="jdbcUrl" value="${jdbcUrl}" />
+		<property name="driverClass" value="${driverClass}" />
+		<property name="user" value="${dbuser}" />
+		<property name="password" value="${password}" />
+ 		<property name="initialPoolSize" value="${initialPoolSize}" />
+		<property name="minPoolSize" value="${minPoolSize}" />
+		<property name="maxPoolSize" value="${maxPoolSize}" />
+		<property name="acquireIncrement" value="${acquireIncrement}" />
+		<property name="maxStatements" value="${maxStatements}" />
+		<property name="maxStatementsPerConnection" value="${maxStatementsPerConnection}" />
+		<property name="maxIdleTime" value="${maxIdleTime}" /> 
+	</bean>
+
+
+
+    <!-- 配置hibernate的SessionFactory -->
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource">
+        </property>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+                <prop key="hibernate.show_sql">false</prop>
+                <prop key="hibernate.format_sql">false</prop>
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
+            </props>
+        </property>
+        <property name="mappingLocations" value="classpath:com/quicker/database/*.hbm.xml"/>
+    </bean>
+</beans>

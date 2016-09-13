@@ -1,0 +1,161 @@
+body{
+	width: 100%;
+
+	font-family: "Microsoft Yahei";
+}
+
+i{
+	color: gray;
+}
+
+.cf:before,.cf:after {
+
+	content:"";
+	display:table;
+
+}
+
+.cf:after {
+	clear:both;
+ }
+
+.cf {
+	zoom:1;
+ }
+
+.header{
+width:100%;
+height:120px;
+background: -ms-linear-gradient(top, #D3E2F7,  #FFFFFF);        /* IE 10 */
+FILTER: progid:DXImageTransform.Microsoft.Gradient(gradientType=0,startColorStr=#D3E2F7,endColorStr=#FFFFFF); /*IE*/
+background:-moz-linear-gradient(top,#D3E2F7,#FFFFFF);/*火狐*/
+background:-webkit-gradient(linear, 0% 0%, 0% 100%,from(#D3E2F7), to(#FFFFFF));/*谷歌*/
+background-image: -webkit-gradient(linear,left bottom,left top,color-start(0, #D3E2F7),color-stop(1, #FFFFFF));/* Safari & Chrome*/
+filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#D3E2F7', endColorstr='#FFFFFF'); /*IE6 & IE7*/
+-ms-filter: "progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#D3E2F7', endColorstr='#FFFFFF')"; /* IE8 */
+}
+
+.headspan{
+	line-height: 70px;
+	margin: 0px;
+	display: block;
+}
+
+.smahead{
+	width: 1200px;
+	margin: 0 auto;
+}
+
+.header p{
+	color: #0068B7;
+	font-size: 40px;
+	font-family: "微软简老宋";
+	padding: 30px 0px;
+	vertical-align:middle;
+}
+
+.header img{
+	width: 70px;
+	height: 70px;
+	vertical-align:middle;
+}
+
+.smahead span{
+	color: #0068B7;
+	font-size: 16px;
+	display: inline;
+}
+
+.headspan span{
+	margin-left: 10px;
+}
+
+.container{
+	width: 100%;
+
+}
+.background{
+	width: 1200px;
+	height: 340px;
+	margin:30px auto 0;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+	background:url("../images/sea.jpg") no-repeat;
+	background-size: 1200px 360px;
+}
+
+.enter{
+	width: 330px;
+	height: 380px;
+	background-color: white;
+	border:1px #73A6D1 solid;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+	position: absolute;
+	float: right;
+	margin:8px 0px 0px 900px;
+}
+
+.enterspan{
+	line-height: 50px;
+	margin: 30px 0px 20px;
+	text-align: center;
+	display: block;
+}
+
+.enter img{
+	width: 50px;
+	height: 50px;
+	display: inline;
+	vertical-align:middle;
+}
+.enter p{
+
+	font-size: 24px;
+	font-family: "微软简老宋";
+	font-weight: 100;
+	line-height: 50px;
+	display: inline;
+	vertical-align:middle;
+	color:#0068B7;
+
+}
+
+.enter i{
+	font-size: 20px;
+	color: #CCCCCC;
+}
+
+.enter input{
+	width: 220px;
+	height: 32px;
+	margin-left: 4px;
+	font-size: 20px;
+	color: #B2B2B2;
+	font-family: "微软雅黑";
+	border:1px #73A6D1 solid;
+}
+
+.spand{
+	width: 260px;
+	height: 50px;
+	margin: 0px auto 10px;
+	text-align: center;
+}
+
+
+
+.spand input{
+	margin-left: 8px;
+}
+
+.enter button{
+	width: 100px;
+	height: 30px;
+	margin: 0 64px;
+}
+
