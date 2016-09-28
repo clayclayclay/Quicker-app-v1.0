@@ -51,8 +51,10 @@
     </div>
 </div>
 <div class="container">
-    <form action="../web/download">
-        <div class="upviews"><span>导出</span><i id="upview" class="icon-download-alt"></i></div>
+    <form action="/quicker/web/download" method="post">
+        <div class="upviews">
+            <input type = "submit" value = "提交">
+            <i id="upview" class="icon-download-alt"></i></div>
         <ul class="onews">
 
             <li><span class="name">通知名称</span> <span class="timeoftitle">发送日期</span>
@@ -60,7 +62,7 @@
             <c:forEach var="excelList" items="${formInfoList}">
                 <c:forEach var="excelInfo" items="${excelList}" begin="0" end="0">
             <li>
-                <input type="checkbox" name="table" value="${excelInfo.get("表格名称")}">
+                <input class="is-check" type="checkbox" name="tableList" value="${excelInfo.get("表格名称")}">
 
                 <a href="javascript:void(0);">${excelInfo.get("表格名称")}</a>
                 <span class="time">${excelInfo.get("上传时间")}</span>
@@ -99,6 +101,7 @@
             </li>
             </c:forEach>
         </ul>
+
     </form>
 </div>
 <div class="footer">

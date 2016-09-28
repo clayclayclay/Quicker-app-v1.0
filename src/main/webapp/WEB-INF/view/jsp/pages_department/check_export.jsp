@@ -25,7 +25,7 @@
   <div class="headtop">
 			<span class="headspan">
 				<p>
-                 <p><img src="/quicker/view/images/logo.png">Uban<span>和你一起在乎你</span></p>
+                  <img src="/quicker/view/images/logo.png">Quiker<span>The Quicker, the richer</span>
                 </p>
 			</span>
   </div>

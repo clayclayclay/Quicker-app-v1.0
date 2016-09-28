@@ -3,6 +3,7 @@ package com.quicker.service;
 import com.quicker.database.StudentInfo;
 import com.quicker.entity.json.BasicJson;
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.LinkedHashMap;
@@ -14,8 +15,12 @@ import java.util.Map;
  */
 public interface FormService {
 
-    //将excel表导出
-    BasicJson excelOutputService(String[] excelName) throws IOException;
+    //将excel表导出到服务器，生成文件
+    BasicJson excelOutputService(String[] excelName, HttpServletResponse response) throws IOException;
+
+    //用户通过浏览器下载excel表
+    void downloadExcel(List<String> excelPath,  HttpServletResponse response);
+
 
     //将填写内容excelList存储到数据库
     boolean excelWrite(List<String> excelList,String stuId);

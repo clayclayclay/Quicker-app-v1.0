@@ -8,18 +8,18 @@ import com.quicker.database.StudentInfo;
 import com.quicker.entity.json.BasicJson;
 import com.quicker.entity.json.Errmsg;
 import com.quicker.service.FormService;
+import com.quicker.util.ZipUtils;
 import org.apache.poi.xssf.usermodel.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
 import java.util.*;
+import java.util.zip.ZipOutputStream;
 
 /**
- * Created by Nanguoyu on 2016/7/7.
+ * Created by Max on 2016/7/7.
  */
 @Service
 public class FormServiceImpl implements FormService {
@@ -29,9 +29,9 @@ public class FormServiceImpl implements FormService {
     private FormDao excelDao;
 
 
-    //将excel表导出
+    //将excel表导出到服务器，生成文件
     @Override
-    public BasicJson excelOutputService(String[] excelName) throws IOException {
+    public BasicJson excelOutputService(String[] excelName, HttpServletResponse response) throws IOException {
         String excelPath = null;
         List<ExcelAndTable> excelAndTableList = null;
         BasicJson basicJson = new BasicJson();
@@ -81,7 +81,12 @@ public class FormServiceImpl implements FormService {
 					生成xls文件，则需要将XSSF系列换成HSSF即可
 
 					 */
+
+        // 清空response
+        response.reset();
+
             for (int k = 0; k < excelName.length; k++) {
+                System.out.println(excelPathName.get(k));
                 out = new FileOutputStream(new File(excelPathName.get(k)));
                 wb = new XSSFWorkbook();
                 XSSFSheet sheet = wb.createSheet();
@@ -99,6 +104,8 @@ public class FormServiceImpl implements FormService {
                 wb.write(out);
                 out.close();
 
+
+                downloadExcel(excelPathName, response);
             }
             basicJson.setStatus(true);
 //        } catch (Exception e) {
@@ -108,8 +115,66 @@ public class FormServiceImpl implements FormService {
 //            errmsg.setDescription("导出失败");
 //            basicJson.setErrorMsg(errmsg);
 //        }
+
+
         return basicJson;
 
+    }
+
+
+
+
+    //用户通过浏览器下载excel表
+    @Override
+    public void downloadExcel(List<String> excelPath, HttpServletResponse response) {
+
+        if (excelPath.size() == 1) {
+            try {
+
+                String path = excelPath.get(0);
+
+                File file = new File(path);
+
+                // 取得文件名。
+                String filename = file.getName();
+                // 以流的形式下载文件。
+                InputStream fis = new BufferedInputStream(new FileInputStream(path));
+                byte[] buffer = new byte[fis.available()];
+                fis.read(buffer);
+                fis.close();
+                // 设置response的Header
+                response.addHeader("Content-Disposition", "attachment;filename="
+                        + new String(filename.getBytes(),"ISO-8859-1"));
+                response.addHeader("Content-Length", "" + file.length());
+                OutputStream toClient = new BufferedOutputStream(
+                        response.getOutputStream());
+                response.setContentType("application/vnd.ms-excel;charset=UTF-8");
+                toClient.write(buffer);
+                toClient.flush();
+                toClient.close();
+
+            } catch (Exception e ) {
+                e.printStackTrace();
+            }
+        }
+        else if (excelPath.size() > 1) {
+            String excelZipName = "excel批量包.zip";
+            response.setContentType("APPLICATION/OCTET-STREAM");
+            try {
+                response.setHeader("Content-Disposition","attachment; filename=" + new String(excelZipName.getBytes(),"ISO-8859-1"));
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+            try {
+                ZipOutputStream out = new ZipOutputStream(response.getOutputStream());
+                for (String excelPathName : excelPath) {
+                    ZipUtils.zipFile(excelPathName, out);
+                    response.flushBuffer();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 

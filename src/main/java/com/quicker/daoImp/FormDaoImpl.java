@@ -55,10 +55,7 @@ public class FormDaoImpl implements FormDao {
             Session session = getSession();
             String hql = "from ExcelInfo excel";
             List<ExcelInfo> list = session.createQuery(hql).list();
-            System.out.println("表格数量为:  " + list.size());
-            for (int i = 0; i < list.size(); i++) {
-                System.out.println(list.get(i).getExcelName());
-            }
+            System.out.println("查询数据库得知，表格总数量为:  " + list.size());
             return list;
 
     }

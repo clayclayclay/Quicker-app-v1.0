@@ -29,8 +29,8 @@ $().ready(function(){
 
 
 	$("#upview").click(function(event) {
-
 		var ssvalue = $(".is-check:checked");
+		alert(ssvalue.length);
 		var svalue = new Array();
 		for (var i = 0; i < ssvalue.length; i++) {
 			svalue[i] = ssvalue.eq(i).attr("value");

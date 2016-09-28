@@ -19,7 +19,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <div class="header">
 	  <div class="headtop">
 			<span class="headscan">
-				<p><img src="/quicker/view/images/logo.png">Uban<span>和你一起在乎你</span></p>
+				<img src="/quicker/view/images/logo.png">Quiker<span>The Quicker, the richer</span>
 				</p>
 				</span>
 	  </div>

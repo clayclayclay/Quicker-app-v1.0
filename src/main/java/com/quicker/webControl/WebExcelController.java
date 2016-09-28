@@ -7,7 +7,9 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import com.quicker.common.ConstantPath;
 import com.quicker.dao.FormDao;
 import com.quicker.daoImp.ActivitiesDaoImpl;
 import com.quicker.database.ExcelInfo;
@@ -50,7 +52,6 @@ public class WebExcelController {
 
 		BasicJson basicJson = new BasicJson();
 
-		String dir = "C:\\excel\\";
 
 		ExcelUtil excelUtil = new ExcelUtil();
 		System.out.println("file[]的大小为：" + files.length);
@@ -66,11 +67,11 @@ public class WebExcelController {
 
 				//调用FileUtiles工具类将文件上传到指定目录。
 				FileUtils.copyInputStreamToFile(fileItem.getInputStream(),
-						new File(dir, fileName));
+						new File(ConstantPath.excelPath, fileName));
 
 				//获取文件名和上传路径
 				String excelName = fileName.substring(0, fileName.length() - 5);
-				String excelPath = dir + fileName;
+				String excelPath = ConstantPath.excelPath + fileName;
 
 				//上传excel信息的Dao层调用
 				formDao.excelUpload(excelName, excelPath);
@@ -130,10 +131,11 @@ public class WebExcelController {
 	//导出指定excel表格的接口
 	@RequestMapping(value = "/download",produces = "application/json;charset=UTF-8")
 	@ResponseBody
-	public String excelDownload(HttpServletRequest request) throws IOException {
-		String tableList = request.getParameter("tableList");
-		String[] excelName = tableList.split(";");
-		BasicJson basicJson = formService.excelOutputService(excelName);
+	public String excelDownload(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		request.setCharacterEncoding("utf-8");
+		String[] tableList = request.getParameterValues("tableList");
+		System.out.println("excelDownload:"  + tableList.length);
+		BasicJson basicJson = formService.excelOutputService(tableList, response);
 		if (basicJson.isStatus()) {
 			System.out.println("导出成功");
 		}
@@ -144,6 +146,18 @@ public class WebExcelController {
 		System.out.println("excelDownload接口测试返回的json为:" + json);
 		return json;
 	}
+
+//	导出指定excel表格的接口
+//	@RequestMapping(value = "/download1",produces = "application/json;charset=UTF-8")
+//	@ResponseBody
+//	public void excelDownload1(HttpServletRequest request, HttpServletResponse response) throws IOException {
+//
+//		request.setCharacterEncoding("utf-8");
+//		String[] tableList = request.getParameterValues("table");
+//		System.out.println(tableList.length);
+//		System.out.println(tableList[0]);
+//
+//	}
 
 
 
